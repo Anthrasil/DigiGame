@@ -1,5 +1,3 @@
-const { link } = require("fs");
-
 let Aero = document.querySelector("#Aero");
 setInterval(() => {
     let width = window.innerWidth / 2;
