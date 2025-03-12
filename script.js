@@ -1,9 +1,13 @@
-let canvas = document.querySelector("#canvas")
+let canvasElement = document.querySelector("#canvas")
+/**
+ * @type {canvas}
+ */
+let ctx = canvasElement.getContext("2d")
 
-let ctx = canvas.getContext("2d")
-ctx.beginPath()
-ctx.fillStyle = "black"
-ctx.stroke = "black"
-ctx.rect(0, 0, 20, 20)
-ctx.fill()
-ctx.closePath()
+setInterval(main, 10)
+let Player = new player(20, 20)
+function main() {
+    canvasElement.style.width = document.innerWidth + "px"
+    canvasElement.style.height = document.innerHeight + "px"
+    Player.main()
+}
