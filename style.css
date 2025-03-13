@@ -8,6 +8,7 @@ body {
 
 #editing {
     display: none;
+    resize: none;
     position: absolute;
 
     background-color: white;

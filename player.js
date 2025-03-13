@@ -5,12 +5,13 @@ class player {
         this.width = 20;
         this.height = 20;
         this.speed = 30;
-        this.editing = false;
-        this.editingInput = document.querySelector("#editing")
-        this.editingInputWidth = 100
+        this.editingInputWidth = 200
         this.editingInputHeight = 200
         this.editingInputOffsetX = 0
         this.editingInputOffsetY = 0
+        this.editing = false;
+        this.editingInput = document.querySelector("#editing")
+        this.editingOffsets = ["editingOffsets", "editingInput", "editing", "editingInputOffsetX", "editingInputOffsetY"]
     }
     main() {
         this.move()
@@ -43,17 +44,28 @@ class player {
     }
     controlEdit() {
         if (this.editing) {
-            this.showEdit()
             if (!mouse.pressed && !this.checkIfHoveredPlayer() && !this.checkIfHoveredEditingInput()) {
                 this.editing = false
                 this.hideEdit()
             }
         } else {
             this.editing = this.checkIfHoveredPlayer()
+            if (this.editing) {
+                this.showEdit()
+            }
         }
     }
     hideEdit() {
         this.editingInput.style.display = "none"
+        let lines = this.editingInput.value.split("\n")
+        lines.forEach((line) => {
+            let key = line.split("=")[0]
+            let value = line.split("=")[1]
+            if (key != undefined && value != undefined) {
+                this[key] = parseFloat(value)
+            }
+            this.correctPlayer()
+        })
     }
     showEdit() {
         let distanceX = 5
@@ -70,9 +82,19 @@ class player {
         this.editingInput.style.left = this.x + this.editingInputOffsetX + "px"
         this.editingInput.style.top = this.y + this.editingInputOffsetY + "px"
         this.editingInput.style.display = "block"
-    }
-    edit() {
-
+        let text = ""
+        for (let i = 0; i < Object.keys(this).length; i++) {
+            let key = Object.keys(this)[i]
+            console.log(Object.keys(this))
+            for (let i = 0; i < this.editingOffsets.length; i++) {
+                if (key === this.editingOffsets[i]) {
+                    continue
+                }
+            }
+            let value = this[key]
+            text += key + "=" + value + "\n"
+        }
+        this.editingInput.value = text
     }
     move() {
         if (keys["ArrowUp"]) {
