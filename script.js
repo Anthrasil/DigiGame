@@ -1,6 +1,7 @@
 let canvasElement = document.querySelector("#canvas")
+let Monitor = document.querySelector("#monitor")
 /**
- * @type {canvas}
+ * @type {CanvasRenderingContext2D}
  */
 let ctx = canvasElement.getContext("2d")
 

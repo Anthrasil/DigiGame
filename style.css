@@ -5,3 +5,12 @@ body {
 #canvas {
     display: block;
 }
+
+#editing {
+    display: none;
+    position: absolute;
+
+    background-color: white;
+    border: 1px solid black;
+
+}
