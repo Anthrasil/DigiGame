@@ -11,7 +11,7 @@ class player {
         this.editingInputOffsetY = 0
         this.editing = false;
         this.editingInput = document.querySelector("#editing")
-        this.editingOffsets = ["editingOffsets", "editingInput", "editing", "editingInputOffsetX", "editingInputOffsetY"]
+        this.editingOffsets = ["editingOffsets", "editingInput", "editing", "editingInputOffsetX", "editingInputOffsetY", "x", "y"]
     }
     main() {
         this.move()
@@ -62,7 +62,10 @@ class player {
             let key = line.split("=")[0]
             let value = line.split("=")[1]
             if (key != undefined && value != undefined) {
-                this[key] = parseFloat(value)
+                let NumberValue = parseFloat(value)
+                if (!isNaN(NumberValue)) {
+                    this[key] = NumberValue
+                }
             }
             this.correctPlayer()
         })
@@ -85,14 +88,16 @@ class player {
         let text = ""
         for (let i = 0; i < Object.keys(this).length; i++) {
             let key = Object.keys(this)[i]
-            console.log(Object.keys(this))
+            let putValueIn = true
             for (let i = 0; i < this.editingOffsets.length; i++) {
                 if (key === this.editingOffsets[i]) {
-                    continue
+                    putValueIn = false
                 }
             }
-            let value = this[key]
-            text += key + "=" + value + "\n"
+            if (putValueIn) {
+                let value = this[key]
+                text += key + "=" + value + "\n"
+            }
         }
         this.editingInput.value = text
     }
