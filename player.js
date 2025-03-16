@@ -72,10 +72,10 @@ class player {
     }
     showEdit() {
         let distanceX = 5
-        this.editingInputOffsetX = this.x + distanceX
+        this.editingInputOffsetX = this.width + distanceX
         this.editingInputOffsetY = 0
-        if (this.x + this.width + this.editingInputWidth > canvasElement.width) {
-            this.editingInputOffsetX = -this.editingInputWidth - distanceX
+        if (this.x + distanceX + this.width + this.editingInputWidth > canvasElement.width) {
+            this.editingInputOffsetX = -this.editingInputWidth - distanceX * 2
         }
         if (this.y + this.editingInputHeight > canvasElement.height) {
             this.editingInputOffsetY = -this.editingInputHeight
