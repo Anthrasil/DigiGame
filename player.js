@@ -5,6 +5,11 @@ class player {
         this.width = 20;
         this.height = 20;
         this.speed = 30;
+        this.color = {
+            r: 0,
+            g: 255,
+            b: 0,
+        }
         this.editingInputWidth = 200
         this.editingInputHeight = 200
         this.editingInputOffsetX = 0
@@ -20,8 +25,8 @@ class player {
     }
     draw() {
         ctx.beginPath();
-        ctx.strokeStyle = "black";
-        ctx.fillStyle = "grey";
+        ctx.strokeStyle = `rgb(this.color.r, this.color.g, this.color.b)`;
+        ctx.fillStyle = `rgb($this.color.r, this.color.g, this.color.b)`;
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
         ctx.fill();
@@ -44,6 +49,7 @@ class player {
     }
     controlEdit() {
         if (this.editing) {
+            this.updateEdit()
             if (!mouse.pressed && !this.checkIfHoveredPlayer() && !this.checkIfHoveredEditingInput()) {
                 this.editing = false
                 this.hideEdit()
@@ -69,6 +75,21 @@ class player {
             }
             this.correctPlayer()
         })
+    }
+    updateEdit() {
+        let distanceX = 5
+        this.editingInputOffsetX = this.width + distanceX
+        this.editingInputOffsetY = 0
+        if (this.x + distanceX + this.width + this.editingInputWidth > canvasElement.width) {
+            this.editingInputOffsetX = -this.editingInputWidth - distanceX * 2
+        }
+        if (this.y + this.editingInputHeight > canvasElement.height) {
+            this.editingInputOffsetY = -this.editingInputHeight
+        }
+        this.editingInput.style.width = this.editingInputWidth + "px"
+        this.editingInput.style.height = this.editingInputHeight + "px"
+        this.editingInput.style.left = this.x + this.editingInputOffsetX + "px"
+        this.editingInput.style.top = this.y + this.editingInputOffsetY + "px"
     }
     showEdit() {
         let distanceX = 5
