@@ -1,5 +1,5 @@
 class player extends collisionObjectRect {
-    constructor(x, y) {
+    constructor(x = 0, y = 0) {
         let width = 20;
         let height = 20;
         let color = {
@@ -7,15 +7,14 @@ class player extends collisionObjectRect {
             g: 0,
             b: 0
         }
-        let editingInputWidth = 200
-        let editingInputHeight = 200
         let editingOffsets = []
-        super(x, y, width, height, color, editingInputWidth, editingInputHeight, editingOffsets)
+        super(x, y, width, height, color, editingOffsets)
         this.speed = 30;
     }
     main() {
         this.move()
         this.ObjMain()
+        this.correctPlayer()
     }
     move() {
         if (keys["ArrowUp"]) {

@@ -1,5 +1,5 @@
 class collisionObjectRect {
-    constructor(x, y, width, height, color, editingInputWidth, editingInputHeight, editingOffsets) {
+    constructor(x = 0, y = 0, width = 0, height = 0, color = { r: 0, g: 0, b: 0 }, editingOffsets = []) {
         this.x = x
         this.y = y
         this.width = width
@@ -7,8 +7,8 @@ class collisionObjectRect {
         this.color_r = color.r
         this.color_g = color.g
         this.color_b = color.b
-        this.editingInputWidth = editingInputWidth
-        this.editingInputHeight = editingInputHeight
+        this.editingInputWidth = 200
+        this.editingInputHeight = 200
         this.editingInputOffsetX = 0
         this.editingInputOffsetY = 0
         this.editing = false;
@@ -67,10 +67,18 @@ class collisionObjectRect {
             if (key != undefined && value != undefined) {
                 let NumberValue = parseFloat(value)
                 if (!isNaN(NumberValue)) {
-                    this[key] = NumberValue
+                    let editAllowed = true
+                    for (let i = 0; i < this.editingOffsets.length; i++) {
+                        if (key == this.editingOffsets[i]) {
+                            editAllowed = false
+                            break;
+                        }
+                    }
+                    if (editAllowed) {
+                        this[key] = NumberValue
+                    }
                 }
             }
-            this.correctPlayer()
         })
     }
     updateEdit() {
