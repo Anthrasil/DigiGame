@@ -5,11 +5,9 @@ class player {
         this.width = 20;
         this.height = 20;
         this.speed = 30;
-        this.color = {
-            r: 0,
-            g: 255,
-            b: 0,
-        }
+        this.color_r = 255
+        this.color_g = 0
+        this.color_b = 0
         this.editingInputWidth = 200
         this.editingInputHeight = 200
         this.editingInputOffsetX = 0
@@ -25,14 +23,14 @@ class player {
     }
     draw() {
         ctx.beginPath();
-        ctx.strokeStyle = `rgb(this.color.r, this.color.g, this.color.b)`;
-        ctx.fillStyle = `rgb($this.color.r, this.color.g, this.color.b)`;
+        ctx.strokeStyle = `rgb(${this.color_r},${this.color_g},${this.color_b})`;
+        ctx.fillStyle = `rgb(${this.color_r}, ${this.color_g}, ${this.color_b})`;
         ctx.rect(this.x, this.y, this.width, this.height);
         ctx.stroke();
         ctx.fill();
         ctx.closePath();
     }
-    checkIfHoveredPlayer() {
+    checkIfHovered() {
         if (mouse.x >= this.x && mouse.y >= this.y && mouse.x <= this.x + this.width && mouse.y <= this.y + this.height) {
             return true
         }
@@ -50,12 +48,12 @@ class player {
     controlEdit() {
         if (this.editing) {
             this.updateEdit()
-            if (!mouse.pressed && !this.checkIfHoveredPlayer() && !this.checkIfHoveredEditingInput()) {
+            if (!mouse.pressed && !this.checkIfHovered() && !this.checkIfHoveredEditingInput()) {
                 this.editing = false
                 this.hideEdit()
             }
         } else {
-            this.editing = this.checkIfHoveredPlayer()
+            this.editing = this.checkIfHovered()
             if (this.editing) {
                 this.showEdit()
             }
