@@ -9,7 +9,7 @@ class player extends collisionObjectRect {
         }
         let editingOffsets = []
         super(x, y, width, height, color, editingOffsets)
-        this.speed = 30;
+        this.speed = 3;
     }
     main() {
         this.move()
@@ -43,6 +43,11 @@ class player extends collisionObjectRect {
         }
         if (this.y + this.height > canvasElement.height) {
             this.y = canvasElement.height - this.height
+        }
+    }
+    collide(x, y, width, height) {
+        if (this.x + width > x && this.y > y && this.y + this.width < y + height && this.x < x + width) {
+            this.x = x - this.width - 1
         }
     }
 }

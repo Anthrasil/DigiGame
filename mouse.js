@@ -1,4 +1,4 @@
-let mouse = { x: 0, y: 0, pressed: false }
+let mouse = { x: -100, y: -100, pressed: false }
 document.addEventListener("mousemove", (e) => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
