@@ -17,11 +17,11 @@ function main() {
     canvasElement.width = window.innerWidth
     canvasElement.height = window.innerHeight
     ctx.clearRect(0, 0, canvasElement.width, canvasElement.height)
-    Player.main()
     for (let i = 0; i < collisionObjects.length; i++) {
         collisionObjects[i].ObjMain()
         Player.collide(collisionObjects[i].x, collisionObjects[i].y, collisionObjects[i].width, collisionObjects[i].height)
     }
+    Player.main()
 }
 document.addEventListener("keydown", (e) => {
     if (e.key == "R") {
