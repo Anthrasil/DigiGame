@@ -12,8 +12,8 @@ class player extends collisionObjectRect {
         this.speed = 3;
     }
     main() {
-        this.move()
         this.ObjMain()
+        this.move()
         this.correctPlayer()
     }
     move() {
@@ -46,8 +46,14 @@ class player extends collisionObjectRect {
         }
     }
     collide(x, y, width, height) {
-        if (this.x + width > x && this.y > y && this.y + this.width < y + height && this.x < x + width) {
-            this.x = x - this.width - 1
+        if (this.x + this.width > x && this.y + this.height > y && this.y < y + height && this.x < x) {
+            this.x = x - this.width
+        }
+        if (this.x < x + width && this.y + this.height > y && this.y < y + height && this.x > 1) {
+            this.x = x + width
+        }
+        if (this.x > x + this.width && this.y + this.height > y && this.y < y && this.x < x + width) {
+            this.y = y - this.height
         }
     }
 }
