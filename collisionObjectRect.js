@@ -59,6 +59,7 @@ class collisionObjectRect {
         }
     }
     hideEdit() {
+        locked = false
         this.editingInput.style.display = "none"
         let lines = this.editingInput.value.split("\n")
         lines.forEach((line) => {
@@ -97,6 +98,7 @@ class collisionObjectRect {
         this.editingInput.style.top = this.y + this.editingInputOffsetY + "px"
     }
     showEdit() {
+        locked = true
         let distanceX = 5
         this.editingInputOffsetX = this.width + distanceX
         this.editingInputOffsetY = 0

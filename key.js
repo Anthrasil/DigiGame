@@ -1,7 +1,12 @@
 let keys = {}
+let locked = false
 document.addEventListener("keydown", (e) => {
-    keys[e.key] = true
+    if (!locked) {
+        keys[e.key] = true
+    }
 })
 document.addEventListener("keyup", (e) => {
-    keys[e.key] = false
+    if (!locked) {
+        keys[e.key] = false
+    }
 })

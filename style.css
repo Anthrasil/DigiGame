@@ -10,8 +10,14 @@ body {
     display: none;
     resize: none;
     position: absolute;
+    accent-color: none;
+    caret-color: yellow;
+    color: white;
+    background-color: black;
+    border: 2px solid transparent;
 
-    background-color: white;
-    border: 1px solid black;
+}
 
+#editing:hover {
+    border-color: blue;
 }

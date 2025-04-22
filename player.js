@@ -49,12 +49,12 @@ class player extends collisionObjectRect {
         this.Allowed.right = true
         this.Allowed.up = true
     }
-    stop(x, valuePosition, valueDirection, size = []) {
-        let valuesize = "width"
-        if (valuePosition === "y") {
-            valuesize = "height"
+    stopBorder(x, valuePosition, valueDirection, size = null) {
+        let SizeSelector = "width"
+        if (valuePosition == "y") {
+            SizeSelector = "height"
         }
-        if (size == []) {
+        if (size == null) {
             if (this[valuePosition] + this.velocity[valuePosition] <= x) {
                 this.Allowed[valueDirection] = false
                 this.velocity[valuePosition] = Math.min(x - this[valuePosition], 0)
@@ -63,26 +63,62 @@ class player extends collisionObjectRect {
                 }
             }
         } else {
-            if (this[valuePosition] + this[valuesize] + this.velocity[valuePosition] >= width) {
+            if (this[valuePosition] + this[SizeSelector] + this.velocity[valuePosition] >= size) {
                 this.Allowed[valueDirection] = false
-                this.velocity[valuePosition] = Math.max(width - this[valuePosition], 0)
+                this.velocity[valuePosition] = Math.max(size - this[valuePosition] - this[SizeSelector], 0)
+                if (this[valuePosition] + this[SizeSelector] > size) {
+                    this[valuePosition] = size - this[SizeSelector]
+                }
             }
         }
     }
     correctPlayer() {
-        this.stop(0, "x", "left")
-        this.stop(0, "x", "right", canvasElement.width)
-        /*if (this.x + this.width + this.velocity.x >= canvasElement.width) {
-            this.Allowed.right = false
-            this.velocity.x = 0
-        }*/
-        this.stop(0, "y", "up")
-        if (this.y + this.height + this.velocity.y >= canvasElement.height) {
-            this.Allowed.down = false
-            this.velocity.y = 0
-        }
+        this.stopBorder(0, "x", "left")
+        this.stopBorder(0, "x", "right", canvasElement.width)
+        this.stopBorder(0, "y", "up")
+        this.stopBorder(0, "y", "down", canvasElement.height)
     }
     collide(x, y, width, height) {
-        this.stop(x + width + 1, "x", "left")
+        if (this.x + this.width >= x && this.x <= x + width && this.y + this.height >= y && this.y <= y + height) {
+            let dir = {
+                x: 0,
+                y: 0
+            }
+            if (this.x + this.width >= x && this.x < x) {
+                this.Allowed.right = false
+                this.velocity.x = Math.min(x - this.x - this.width, 0)
+                if (this.x + this.width > x) {
+                    this.x = x - this.width
+                }
+                dir.x++
+            }
+            if (this.y + this.height >= y && this.y < y) {
+                this.Allowed.down = false
+                this.velocity.y = Math.min(y - this.y - this.height, 0)
+                if (this.y + this.height > y) {
+                    this.y = y - this.height
+                }
+                dir.y++
+            }
+            if (this.x <= x + width && this.x + this.width > x + width) {
+                this.Allowed.left = false
+                this.velocity.x = Math.max(x + width - this.x, 0)
+                if (this.x < x + width) {
+                    this.x = x + width
+                }
+                dir.x--
+            }
+            if (this.y <= y + height && this.y + this.height > y + height) {
+                this.Allowed.up = false
+                this.velocity.y = Math.max(y + height - this.y, 0)
+                if (this.y < y + height) {
+                    this.y = y + height
+                }
+                dir.y--
+            }
+
+            this.velocity.x = dir.x * -0.1
+            this.velocity.y = dir.y * -0.1
+        }
     }
 }
