@@ -1,5 +1,5 @@
 class programmField {
-    constructor() {
+    constructor(preset) {
         this.input = document.querySelector("#editing")
         this.width = 200
         this.height = 200
@@ -8,9 +8,9 @@ class programmField {
         this.showed = false
         this.borderRadius = 10
     }
-    main() {
+    main(preset) {
         this.allowed = this.AllowedToShow()
-        this.show()
+        this.show(preset)
         this.hide()
     }
     updatePosition() {
@@ -19,13 +19,14 @@ class programmField {
         this.CenterX = this.x - this.width / 2
         this.CenterY = this.y - this.height / 2
     }
-    show() {
+    show(placeholder) {
         if (!this.allowed) {
             return false
         }
         if (!this.showed) {
             this.updatePosition()
             this.input.value = ""
+            this.input.placeholder=placeholder;
             locked = true
         }
         this.input.style.display = "block"

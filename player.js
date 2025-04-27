@@ -1,7 +1,5 @@
 class player extends collisionObjectRect {
-    constructor(x = 0, y = 0) {
-        let width = 20;
-        let height = 20;
+    constructor(x = 0, y = 0,width,height) {
         let color = {
             r: 255,
             g: 0,
