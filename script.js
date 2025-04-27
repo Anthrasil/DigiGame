@@ -7,9 +7,9 @@ let ctx = canvasElement.getContext("2d")
 console.log(LevelStruct([20,20,20,20,[[500,0,200,500],[500,510,200,10000]]],[1000,200,20,20],"The box you write init in is a code insertin use it to solve this Level"))
 let Level={
     0:{placeholder:"Use init(levelNumber) to start the Level.\nLevel 1-3 are useable."},
-    1:LevelStruct([20,20,20,20],[],[1000,200,20,20],"Try to get to the green box, it's the finish"),
-    2:LevelStruct([20,20,20,20],[[500,0,200,1000000]],[1000,200,20,20],"Try to edit the black box so that you can go to the cube"),
-    3:LevelStruct([20,20,20,20],[[500,0,200,500],[500,520,200,10000]],[1000,200,20,20],"The box you write init in is a code insertin use it to solve this Level")
+    1:LevelStruct([20,20,20,20],[],[1000,200,20,20],"Try to get to the green box, it's the goal"),
+    2:LevelStruct([20,20,20,20],[[500,0,200,1000000]],[1000,200,20,20],"Try to edit the black box so that you can go to the finish."),
+    3:LevelStruct([20,20,20,20],[[500,0,200,500],[500,520,200,10000]],[1000,200,20,20],"The box you write init in is a code insertion use it to solve this Level")
 }
 let Field = new programmField("Skibidi")
 let Player = null
