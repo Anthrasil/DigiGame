@@ -11,7 +11,7 @@ let Level={
     2:LevelStruct([20,20,20,20],[[500,0,200,1000000]],[1000,200,20,20],"Try to edit the black box so that you can go to the finish."),
     3:LevelStruct([20,20,20,20],[[500,0,200,500],[500,520,200,10000]],[1000,200,20,20],"The box you write init in is a code insertion use it to solve this Level")
 }
-let Field = new programmField("Skibidi")
+let Field = new programmField("")
 let Player = null
 let collisionObjects = []
 let textflag = new cursoreffects.textFlag({ text: " ", color: ["#FF6800"] })
@@ -60,6 +60,6 @@ function LevelStruct(Player,CollisionObjects,Finish,Placeholder) {
 }
 document.addEventListener("keydown", (e) => {
     if (e.key == "R") {
-        init(0)
+        init(LevelNow)
     }
 })
